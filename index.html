@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte Parking — Il gestionale che hai sempre desiderato</title>
+  <meta name="description" content="Charlotte Parking è il gestionale SaaS per parcheggi privati. Prenotazioni, soste, badge GPS, preventivi e convenzioni. Prova gratis 30 giorni.">
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F4F2FA;
+      --card: #FFFFFF;
+      --purple: #7B2FBE;
+      --purple-light: #f0e8fa;
+      --purple-dark: #6020a0;
+      --dark: #12102a;
+      --text: #1a1a2e;
+      --muted: #6b6b80;
+      --border: #e4e0f0;
+      --red: #e02020;
+      --orange: #d4600a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--purple); }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--purple); }
+    .btn-nav {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px 20px;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-nav:hover { background: var(--purple-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5.5rem 2rem 4rem;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: var(--purple-light);
+      border-radius: 100px;
+      padding: 5px 16px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 6vw, 60px);
+      line-height: 1.07;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    h1 em { font-style: italic; color: var(--purple); }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--purple-dark); }
+    .btn-ghost {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .btn-ghost:hover { background: var(--purple-light); }
+
+    /* ── COMPAT BAR ── */
+    .compat-bar {
+      background: var(--card);
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .compat-bar p { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+    .compat-icons { display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .compat-item { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .compat-item i { font-size: 26px; color: var(--purple); }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--card);
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .stat {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-right: 0.5px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      color: var(--purple);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    /* ── SECTIONS ── */
+    .section { max-width: 960px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 580px;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .feature-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: #c4a0e8; }
+    .feature-card.highlight {
+      border: 1.5px solid var(--purple);
+      background: var(--purple-light);
+    }
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--purple-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: var(--purple);
+      font-size: 22px;
+    }
+    .feature-card.highlight .feature-icon { background: #fff; }
+    .feature-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; counter-reset: steps; }
+    .step {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      counter-increment: steps;
+      position: relative;
+    }
+    .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      color: var(--purple-light);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .step-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── ROLES ── */
+    .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .roles { grid-template-columns: 1fr; } }
+    .role-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+    .role-card.owner { border-top: 3px solid var(--purple); }
+    .role-card.operator { border-top: 3px solid #c4a0e8; }
+    .role-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; }
+    .role-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .role-icon.owner { background: var(--purple-light); color: var(--purple); }
+    .role-icon.operator { background: #f3ecfc; color: #9b59d4; }
+    .role-name { font-size: 16px; font-weight: 500; color: var(--text); }
+    .role-desc { font-size: 12px; color: var(--muted); }
+    .role-list { list-style: none; }
+    .role-list li { font-size: 13px; color: var(--muted); padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; border-bottom: 0.5px solid var(--border); }
+    .role-list li:last-child { border-bottom: none; }
+    .role-list i { color: var(--purple); font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      background: var(--dark);
+      padding: 4.5rem 2rem;
+      text-align: center;
+    }
+    .quote-mark {
+      font-size: 56px;
+      color: var(--purple);
+      font-family: 'DM Serif Display', serif;
+      line-height: 0.5;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    blockquote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(20px, 3.5vw, 32px);
+      font-style: italic;
+      color: #fff;
+      max-width: 680px;
+      margin: 0 auto 1.25rem;
+      line-height: 1.35;
+    }
+    .quote-author { font-size: 11px; color: #6060a0; letter-spacing: 1.5px; text-transform: uppercase; }
+
+    /* ── PRICING ── */
+    .pricing-wrap { max-width: 520px; margin: 0 auto; }
+    .plan {
+      background: var(--card);
+      border: 2px solid var(--purple);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-ribbon {
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 44px;
+      transform: rotate(35deg);
+      letter-spacing: 1px;
+    }
+    .plan-badge {
+      display: inline-block;
+      background: var(--purple);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 16px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+    .price-cascade { margin-bottom: 0.5rem; display: flex; align-items: baseline; justify-content: center; gap: 6px; flex-wrap: wrap; }
+    .price-original { font-size: 22px; color: #bbb; text-decoration: line-through; font-weight: 300; }
+    .price-arrow { font-size: 16px; color: #ccc; }
+    .price-mid {
+      font-size: 26px;
+      color: var(--orange);
+      text-decoration: line-through;
+      font-family: 'DM Serif Display', serif;
+    }
+    .price-mid-sub { font-size: 13px; font-weight: 300; }
+    .plan-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 74px;
+      color: var(--text);
+      line-height: 1;
+      margin: 0.25rem 0 0;
+    }
+    .plan-price sup { font-size: 26px; vertical-align: top; margin-top: 16px; display: inline-block; font-weight: 300; color: var(--purple); font-family: 'DM Sans', sans-serif; }
+    .plan-price sub { font-size: 15px; font-weight: 300; color: var(--muted); font-family: 'DM Sans', sans-serif; }
+    .saving-badge {
+      display: inline-block;
+      background: #ffeaea;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin: 0.6rem 0 0.3rem;
+    }
+    .plan-launch { font-size: 12px; color: var(--purple); font-weight: 500; margin-bottom: 0.2rem; }
+    .plan-trial { font-size: 13px; color: var(--muted); margin-bottom: 2rem; }
+    .plan-features {
+      list-style: none;
+      text-align: left;
+      border-top: 0.5px solid var(--border);
+      padding-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .plan-features li { font-size: 13px; color: var(--muted); padding: 7px 0; display: flex; align-items: center; gap: 7px; }
+    .plan-features i { color: var(--purple); font-size: 14px; }
+    .plan-cta {
+      margin-top: 2rem;
+      width: 100%;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .plan-cta:hover { background: var(--purple-dark); }
+    .plan-note { font-size: 12px; color: #9999b0; margin-top: 1rem; }
+    .urgency { margin-top: 1.25rem; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: var(--red); font-weight: 500; }
+
+    /* ── PIANI DETTAGLIO ── */
+    .plans-detail { margin-top: 3rem; }
+    .plans-detail h3 { font-size: 15px; font-weight: 500; color: var(--muted); text-align: center; margin-bottom: 1rem; }
+    .plans-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .plans-table th { background: var(--purple-light); color: var(--purple); font-weight: 500; padding: 10px 12px; text-align: center; border: 0.5px solid var(--border); }
+    .plans-table th:first-child { text-align: left; }
+    .plans-table td { padding: 9px 12px; border: 0.5px solid var(--border); text-align: center; background: var(--card); color: var(--muted); }
+    .plans-table td:first-child { text-align: left; color: var(--text); font-weight: 400; }
+    .plans-table tr:hover td { background: #faf8ff; }
+    .check-yes { color: var(--purple); }
+    .check-no { color: #ccc; }
+
+    /* ── INSTALL ── */
+    .install-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .install-card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .install-card i { font-size: 36px; color: var(--purple); margin-bottom: 0.75rem; display: block; }
+    .install-card h3 { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+    .install-card p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .install-card code { font-size: 11px; background: var(--purple-light); color: var(--purple); padding: 2px 6px; border-radius: 4px; }
+
+    /* ── CTA FINALE ── */
+    .cta-section { text-align: center; padding: 5.5rem 2rem; max-width: 600px; margin: 0 auto; }
+    .cta-section h2 { margin-bottom: 1rem; }
+    .cta-sub { font-size: 17px; color: var(--muted); margin-bottom: 2rem; font-weight: 300; }
+
+    /* ── DIVIDER ── */
+    hr { border: none; border-top: 0.5px solid var(--border); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: #5a5878;
+    }
+    footer a { color: #9b7ed4; text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links a { display: none; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 0.5px solid var(--border); }
+      .plan-features { grid-template-columns: 1fr; }
+      .plans-table { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Charlotte<span>.</span></a>
+    <div class="nav-links">
+      <a href="#funzionalita">Funzionalità</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#installa">Installazione</a>
+      <a href="https://charlottesystems.github.io/charlotte-commercial" class="btn-nav" target="_blank">Prova gratis ↗</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Gestionale per parcheggi</div>
+    <h1>Il gestionale che<br><em>hai sempre desiderato.</em></h1>
+    <p class="hero-sub">Ingressi, uscite, prenotazioni, badge turni, preventivi e convenzioni — tutto in un'unica app. Semplice, professionale, a un costo fuori da ogni concorrenza.</p>
+    <div class="hero-ctas">
+      <a href="https://charlottesystems.github.io/charlotte-commercial" class="btn-primary" target="_blank">
+        <i class="ti ti-player-play"></i> Inizia gratis — 30 giorni
+      </a>
+      <a href="#funzionalita" class="btn-ghost">Scopri le funzionalità</a>
+    </div>
+  </div>
+
+  <!-- COMPAT BAR -->
+  <div class="compat-bar">
+    <p>Funziona su qualsiasi dispositivo con connessione internet — il tuo telefono, quello dei tuoi dipendenti, il tablet alla cassa</p>
+    <div class="compat-icons">
+      <div class="compat-item"><i class="ti ti-brand-android"></i>Android</div>
+      <div class="compat-item"><i class="ti ti-brand-apple"></i>iPhone / iPad</div>
+      <div class="compat-item"><i class="ti ti-device-laptop"></i>Web browser</div>
+      <div class="compat-item"><i class="ti ti-device-desktop"></i>Desktop</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">digitale — addio fogli Excel e quaderni</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">operatori su qualsiasi dispositivo</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">€39</span>
+      <span class="stat-label">al mese, offerta di lancio</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- FUNZIONALITÀ -->
+  <div class="section" id="funzionalita">
+    <div class="section-label">Funzionalità</div>
+    <h2>Tutto quello che serve.<br>Niente di quello che non serve.</h2>
+    <p class="section-sub">Charlotte è nata in un garage vero. Ogni funzionalità risponde a un problema reale di chi gestisce un parcheggio ogni giorno.</p>
+
+    <div class="features">
+      <div class="feature-card highlight">
+        <div class="feature-icon"><i class="ti ti-map-pin"></i></div>
+        <div class="feature-title">Badge turni con GPS</div>
+        <div class="feature-desc">I dipendenti timbrano inizio e fine turno dall'app. Il sistema verifica che si trovino fisicamente nel garage prima di accettare la timbratura. L'owner vede ore lavorate e storico turni in tempo reale.</div>
+      </div>
+      <div class="feature-card highlight">
+        <div class="feature-icon"><i class="ti ti-receipt"></i></div>
+        <div class="feature-title">Preventivi e tariffe personalizzate</div>
+        <div class="feature-desc">Configura tariffe distinte per ogni categoria di veicolo e per ogni garage. Il sistema calcola automaticamente il preventivo con tolleranze orarie e soglie giornaliere. Zero errori di calcolo.</div>
+      </div>
+      <div class="feature-card highlight">
+        <div class="feature-icon"><i class="ti ti-building-store"></i></div>
+        <div class="feature-title">Convenzioni strutture ricettive</div>
+        <div class="feature-desc">Gestisci convenzioni tariffarie con hotel, B&B e negozi. Le tariffe convenzionate sono visibili solo agli operatori nell'app — i clienti non possono accedervi senza comunicarvelo di persona.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-car"></i></div>
+        <div class="feature-title">Registrazione ingressi e uscite</div>
+        <div class="feature-desc">Inserisci la targa a mano, tramite fotocamera con OCR automatico, o dalla galleria. Il sistema registra data, ora e nome dell'operatore per ogni operazione.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-calendar"></i></div>
+        <div class="feature-title">Prenotazioni online</div>
+        <div class="feature-desc">Ogni garage ha un link pubblico di prenotazione condivisibile via WhatsApp, email o QR code. Il preventivo si calcola in tempo reale. Nessuna approvazione manuale necessaria.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-chart-bar"></i></div>
+        <div class="feature-title">Registro cassa e report</div>
+        <div class="feature-desc">Riepilogo giornaliero con incassi per categoria e per convenzione. Export CSV in un click, compatibile con Excel italiano. Storico soste con ricerca per targa e data.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-building"></i></div>
+        <div class="feature-title">Multi-garage</div>
+        <div class="feature-desc">Gestisci più garage da un unico account. Tariffe, convenzioni, operatori e coordinate GPS configurabili indipendentemente per ogni struttura.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-users"></i></div>
+        <div class="feature-title">Gestione operatori con PIN</div>
+        <div class="feature-desc">Crea operatori inserendo solo il nome: il sistema genera un PIN a 6 cifre. Il dipendente accede da qualsiasi dispositivo senza bisogno di un account personale.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-lock"></i></div>
+        <div class="feature-title">Ruoli e permessi</div>
+        <div class="feature-desc">L'owner ha accesso completo alla configurazione e agli storici. Gli operatori vedono solo le funzioni operative. Nessuna operazione fuori controllo.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- COME FUNZIONA -->
+  <div class="section">
+    <div class="section-label">Come funziona</div>
+    <h2>Operativo in cinque minuti.</h2>
+    <p class="section-sub">Nessuna installazione di server, nessun tecnico, nessun contratto lungo. Apri il browser e sei già operativo.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Crea il tuo account</div>
+        <div class="step-desc">Registrati con email e password. Hai 30 giorni di prova gratuita per esplorare tutto senza limiti.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Configura il tuo garage</div>
+        <div class="step-desc">Inserisci nome, indirizzo e tariffe per categoria di veicolo. Se hai convenzioni con strutture ricettive, aggiungile subito.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Aggiungi i tuoi operatori</div>
+        <div class="step-desc">Inserisci il nome di ogni dipendente: il sistema genera automaticamente un PIN a 6 cifre. Il dipendente accede subito dal suo telefono.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Inizia a lavorare</div>
+        <div class="step-desc">Registra ingressi, uscite, prenotazioni. I calcoli sono automatici. Tu controlli tutto dal pannello owner in tempo reale.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- RUOLI -->
+  <div class="section">
+    <div class="section-label">Ruoli</div>
+    <h2>Due ruoli, zero confusione.</h2>
+    <p class="section-sub">Charlotte distingue nettamente il proprietario dai dipendenti. Ognuno vede esattamente ciò di cui ha bisogno.</p>
+    <div class="roles">
+      <div class="role-card owner">
+        <div class="role-header">
+          <div class="role-icon owner"><i class="ti ti-crown"></i></div>
+          <div>
+            <div class="role-name">Owner — Proprietario</div>
+            <div class="role-desc">Accesso con email e password</div>
+          </div>
+        </div>
+        <ul class="role-list">
+          <li><i class="ti ti-check"></i>Configura tariffe per ogni categoria e garage</li>
+          <li><i class="ti ti-check"></i>Crea e gestisce operatori con PIN</li>
+          <li><i class="ti ti-check"></i>Visualizza storico soste completo</li>
+          <li><i class="ti ti-check"></i>Gestisce convenzioni hotel e strutture</li>
+          <li><i class="ti ti-check"></i>Accede al registro cassa e agli export</li>
+          <li><i class="ti ti-check"></i>Controlla badge e turni degli operatori</li>
+          <li><i class="ti ti-check"></i>Gestisce l'abbonamento</li>
+        </ul>
+      </div>
+      <div class="role-card operator">
+        <div class="role-header">
+          <div class="role-icon operator"><i class="ti ti-user"></i></div>
+          <div>
+            <div class="role-name">Operatore — Dipendente</div>
+            <div class="role-desc">Accesso con PIN a 6 cifre, da qualsiasi dispositivo</div>
+          </div>
+        </div>
+        <ul class="role-list">
+          <li><i class="ti ti-check"></i>Registra ingressi (manuale o OCR targa)</li>
+          <li><i class="ti ti-check"></i>Registra uscite con calcolo automatico</li>
+          <li><i class="ti ti-check"></i>Applica convenzioni ai clienti</li>
+          <li><i class="ti ti-check"></i>Visualizza prenotazioni del giorno</li>
+          <li><i class="ti ti-check"></i>Timbra inizio e fine turno con GPS</li>
+          <li><i class="ti ti-check"></i>Vede la lista soste attive del turno</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <span class="quote-mark">"</span>
+    <blockquote>Il gestionale che avresti voluto avere fin dal primo giorno di attività.</blockquote>
+    <p class="quote-author">Garage di riferimento — Cliente Charlotte Parking</p>
+  </div>
+
+  <!-- PREZZI -->
+  <div class="section" id="prezzi">
+    <div class="section-label">Prezzi</div>
+    <h2>Un costo fuori<br>da ogni concorrenza.</h2>
+    <p class="section-sub">Per festeggiare il lancio ufficiale di Charlotte, abbiamo abbattuto il prezzo. Approfittane finché dura — è riservato ai primi clienti.</p>
+
+    <div class="pricing-wrap">
+      <div class="plan">
+        <div class="plan-ribbon">LANCIO</div>
+        <div class="plan-badge">Offerta di lancio — tutto incluso</div>
+        <div class="price-cascade">
+          <span class="price-original">€99/mese</span>
+          <span class="price-arrow">→</span>
+          <span class="price-mid">€59<span class="price-mid-sub">/mese</span></span>
+          <span class="price-arrow">→</span>
+        </div>
+        <div class="plan-price"><sup>€</sup>39<sub>/mese</sub></div>
+        <div class="saving-badge">Risparmi €60/mese rispetto al listino</div>
+        <div class="plan-launch">🎉 Prezzo speciale per i primi clienti Charlotte</div>
+        <div class="plan-trial">30 giorni di prova gratuita — carta di credito richiesta, nessun addebito immediato</div>
+        <ul class="plan-features">
+          <li><i class="ti ti-check"></i>Badge turni GPS</li>
+          <li><i class="ti ti-check"></i>Preventivi automatici</li>
+          <li><i class="ti ti-check"></i>Convenzioni ricettive</li>
+          <li><i class="ti ti-check"></i>Prenotazioni online</li>
+          <li><i class="ti ti-check"></i>Multi-operatore</li>
+          <li><i class="ti ti-check"></i>Registro cassa + CSV</li>
+          <li><i class="ti ti-check"></i>OCR targa</li>
+          <li><i class="ti ti-check"></i>App Android + web</li>
+          <li><i class="ti ti-check"></i>Notifiche Telegram</li>
+          <li><i class="ti ti-check"></i>Supporto prioritario</li>
+        </ul>
+        <a href="https://charlottesystems.github.io/charlotte-commercial/checkout.html" class="plan-cta" target="_blank">Inizia gratis — 30 giorni ↗</a>
+        <p class="plan-note">Disdici quando vuoi. Nessun vincolo contrattuale.</p>
+        <div class="urgency"><i class="ti ti-clock"></i> Offerta disponibile solo per i primi clienti</div>
+      </div>
+    </div>
+
+    <div class="plans-detail">
+      <h3>Confronto piani completo</h3>
+      <table class="plans-table">
+        <thead>
+          <tr>
+            <th>Funzionalità</th>
+            <th>Starter — €39</th>
+            <th>Pro — €79</th>
+            <th>Enterprise — €99</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Garage</td><td>1</td><td>Fino a 5</td><td>Illimitati</td></tr>
+          <tr><td>Operatori</td><td>Illimitati</td><td>Illimitati</td><td>Illimitati</td></tr>
+          <tr><td>Prenotazioni online</td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td></tr>
+          <tr><td>Registro cassa + export CSV</td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td></tr>
+          <tr><td>Convenzioni strutture ricettive</td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td></tr>
+          <tr><td>Badge GPS turni operatori</td><td><i class="ti ti-x check-no"></i></td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td></tr>
+          <tr><td>Multi-garage</td><td><i class="ti ti-x check-no"></i></td><td><i class="ti ti-check check-yes"></i></td><td><i class="ti ti-check check-yes"></i></td></tr>
+          <tr><td>Prova gratuita</td><td>30 giorni</td><td>30 giorni</td><td>30 giorni</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- INSTALLAZIONE -->
+  <div class="section" id="installa">
+    <div class="section-label">Installazione</div>
+    <h2>Su qualsiasi dispositivo.<br>In meno di un minuto.</h2>
+    <p class="section-sub">Nessun software da installare, nessun tecnico necessario. Charlotte funziona sul browser di qualsiasi dispositivo connesso a internet.</p>
+    <div class="install-grid">
+      <div class="install-card">
+        <i class="ti ti-brand-android"></i>
+        <h3>Android</h3>
+        <p>Cerca <code>Charlotte Parking</code> su Google Play Store e installa. Richiede Android 7.0 o superiore.</p>
+      </div>
+      <div class="install-card">
+        <i class="ti ti-brand-apple"></i>
+        <h3>iPhone / iPad</h3>
+        <p>Apri Safari, vai su Charlotte, tocca Condividi → <code>Aggiungi a schermata Home</code>. Funziona su iOS 14 o superiore.</p>
+      </div>
+      <div class="install-card">
+        <i class="ti ti-device-laptop"></i>
+        <h3>Computer</h3>
+        <p>Apri qualsiasi browser moderno e accedi. Funziona su Chrome, Firefox, Safari, Edge. Nessuna installazione.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- CTA FINALE -->
+  <div class="cta-section">
+    <h2>Il tuo garage merita uno strumento moderno.</h2>
+    <p class="cta-sub">Ci vogliono meno di cinque minuti per configurare il tuo primo garage. Inizia gratis, senza impegno.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://charlottesystems.github.io/charlotte-commercial" class="btn-primary" target="_blank">
+        Inizia la prova gratuita ↗
+      </a>
+      <a href="mailto:info@charlottesystems.it" class="btn-ghost">Contattaci</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://charlottesystems.github.io/charlotte-commercial/privacy.html" target="_blank">Privacy Policy</a>
+      <a href="https://charlottesystems.github.io/charlotte-commercial/termini.html" target="_blank">Termini e Condizioni</a>
+      <a href="https://charlottesystems.github.io/charlotte-commercial/elimina-account.html" target="_blank">Elimina account</a>
+      <a href="mailto:info@charlottesystems.it">info@charlottesystems.it</a>
+    </div>
+    <p>Charlotte Parking · Charlotte Systems · charlotteparking.it · © 2026 — Tutti i diritti riservati</p>
+  </footer>
+
+</body>
+</html>
