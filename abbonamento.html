@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte Parking — Abbonati</title>
+  <meta name="description" content="Abbonati a Charlotte Parking. Gestionale professionale per parcheggi privati. 39€/mese, 30 giorni di prova gratuita.">
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F4F2FA;
+      --card: #FFFFFF;
+      --purple: #7B2FBE;
+      --purple-light: #f0e8fa;
+      --purple-dark: #6020a0;
+      --dark: #12102a;
+      --text: #1a1a2e;
+      --muted: #6b6b80;
+      --border: #e4e0f0;
+      --green: #16a34a;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container { max-width: 520px; width: 100%; }
+
+    .back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; text-decoration: none; margin-bottom: 24px; }
+    .back:hover { color: var(--purple); }
+
+    .header { text-align: center; margin-bottom: 32px; }
+    .logo { width: 64px; height: 64px; background: linear-gradient(135deg, #7B2FBE, #a855f7); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 32px; color: white; margin: 0 auto 16px; box-shadow: 0 8px 32px rgba(123,47,190,0.3); }
+    .header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--dark); margin-bottom: 8px; }
+    .header p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+    .card { background: var(--card); border: 2px solid var(--purple); border-radius: 24px; padding: 32px 28px; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #7B2FBE, #a855f7); }
+
+    .badge { display: inline-block; background: linear-gradient(135deg, #7B2FBE, #a855f7); color: white; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.5px; margin-bottom: 20px; }
+
+    .price-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 4px; }
+    .price-old { font-size: 18px; color: var(--muted); text-decoration: line-through; }
+    .price-main { font-size: 52px; font-weight: 700; color: var(--purple); line-height: 1; }
+    .price-sub { font-size: 16px; color: var(--muted); }
+    .price-note { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--border); padding-top: 20px; margin-bottom: 28px; }
+    .features li { font-size: 13px; color: var(--text); padding: 7px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+    .features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s; }
+    .form-group input:focus { border-color: var(--purple); }
+
+    .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #7B2FBE, #a855f7); border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 17px; color: white; cursor: pointer; transition: all 0.2s; }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .error-msg { color: #dc2626; font-size: 13px; margin-top: 8px; display: none; }
+
+    .guarantee { text-align: center; margin-top: 16px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .legal { text-align: center; margin-top: 12px; font-size: 11px; color: var(--muted); }
+    .legal a { color: var(--purple); text-decoration: none; }
+
+    .manage-link { text-align: center; margin-top: 20px; }
+    .manage-link a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .manage-link a:hover { color: var(--purple); }
+
+    @media (max-width: 480px) {
+      .features { grid-template-columns: 1fr; }
+      .price-main { font-size: 42px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <a class="back" href="index.html">← Torna alla home</a>
+
+  <div class="header">
+    <div class="logo">C</div>
+    <h1>Charlotte Parking</h1>
+    <p>Il gestionale professionale per parcheggi privati.<br>Tutto incluso, un prezzo solo.</p>
+  </div>
+
+  <div class="card">
+    <div class="badge">🔥 OFFERTA DI LANCIO — TUTTO INCLUSO</div>
+
+    <div class="price-row">
+      <span class="price-old">€99</span>
+    </div>
+    <div class="price-row">
+      <span class="price-main">39€</span>
+      <span class="price-sub">/mese</span>
+    </div>
+    <div class="price-note">30 giorni di prova gratuita · Disdici quando vuoi</div>
+
+    <ul class="features">
+      <li>Garage illimitati</li>
+      <li>Operatori illimitati</li>
+      <li>Badge GPS turni</li>
+      <li>Preventivi automatici</li>
+      <li>Convenzioni ricettive</li>
+      <li>Prenotazioni online</li>
+      <li>Registro cassa + CSV</li>
+      <li>OCR targa</li>
+      <li>App Android + web</li>
+      <li>Supporto prioritario</li>
+    </ul>
+
+    <div class="form-group">
+      <label>La tua email</label>
+      <input type="email" id="checkout-email" placeholder="nome@azienda.it" autocomplete="email">
+    </div>
+
+    <button class="btn" id="checkout-btn" onclick="avviaCheckout()">
+      Inizia la prova gratuita — 30 giorni →
+    </button>
+    <div class="error-msg" id="checkout-error"></div>
+  </div>
+
+  <div class="guarantee">
+    🔒 Pagamento sicuro con Stripe · Nessun addebito per 30 giorni · Cancella in qualsiasi momento
+  </div>
+
+  <div class="legal">
+    Continuando accetti i nostri
+    <a href="https://charlottesystems.github.io/charlotte-commercial/termini.html" target="_blank">Termini di Servizio</a> e la
+    <a href="https://charlottesystems.github.io/charlotte-commercial/privacy.html" target="_blank">Privacy Policy</a>
+  </div>
+
+  <div class="manage-link">
+    <a href="#" onclick="apriPortaleGestione(); return false;">Hai già un abbonamento? Gestiscilo qui →</a>
+  </div>
+
+</div>
+
+<script>
+  const SUPABASE_FUNCTIONS_URL = 'https://cmglerkaiycllfvgjuww.supabase.co/functions/v1';
+
+  async function avviaCheckout() {
+    const emailInput = document.getElementById('checkout-email');
+    const btn = document.getElementById('checkout-btn');
+    const errEl = document.getElementById('checkout-error');
+
+    const email = emailInput.value.trim();
+    errEl.style.display = 'none';
+
+    if (!email || !email.includes('@')) {
+      errEl.textContent = 'Inserisci un indirizzo email valido.';
+      errEl.style.display = 'block';
+      emailInput.focus();
+      return;
+    }
+
+    btn.textContent = 'Reindirizzamento a Stripe...';
+    btn.disabled = true;
+
+    try {
+      const resp = await fetch(SUPABASE_FUNCTIONS_URL + '/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          success_url: window.location.origin + '/success.html?session_id={CHECKOUT_SESSION_ID}',
+          cancel_url: window.location.href,
+        }),
+      });
+
+      const data = await resp.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'Errore sconosciuto');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      errEl.textContent = 'Errore durante il reindirizzamento. Riprova tra qualche secondo.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Inizia la prova gratuita — 30 giorni →';
+      btn.disabled = false;
+    }
+  }
+
+  async function apriPortaleGestione() {
+    const email = prompt('Inserisci la tua email per accedere al portale di gestione:');
+    if (!email) return;
+
+    // Per il portale dal sito (senza JWT), usa il link Stripe diretto
+    // L'utente dovrà autenticarsi tramite email nel portale Stripe
+    window.open('https://billing.stripe.com/p/login/6oU3cwa7w8Lg5YP97Lc7u00', '_blank');
+  }
+
+  // Precompila email se passata come query param
+  const params = new URLSearchParams(window.location.search);
+  const emailParam = params.get('email');
+  if (emailParam) document.getElementById('checkout-email').value = emailParam;
+
+  // Enter key
+  document.getElementById('checkout-email').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') avviaCheckout();
+  });
+</script>
+
+</body>
+</html>

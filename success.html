@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte Parking — Pagamento completato!</title>
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F4F2FA;
+      --card: #FFFFFF;
+      --purple: #7B2FBE;
+      --green: #16a34a;
+      --text: #1a1a2e;
+      --muted: #6b6b80;
+      --border: #e4e0f0;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      max-width: 480px;
+      width: 100%;
+      background: var(--card);
+      border: 2px solid var(--green);
+      border-radius: 24px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .icon { font-size: 72px; margin-bottom: 16px; animation: pop 0.5s ease; }
+    @keyframes pop { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+    h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--text); margin-bottom: 8px; }
+    .sub { font-size: 15px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+
+    .steps { text-align: left; margin-bottom: 32px; }
+    .step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+    .step-num { width: 28px; height: 28px; background: var(--purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: white; flex-shrink: 0; }
+    .step-text { font-size: 14px; color: var(--text); padding-top: 4px; line-height: 1.5; }
+    .step-text strong { color: var(--purple); }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #7B2FBE, #a855f7);
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+    .manage { font-size: 13px; color: var(--muted); }
+    .manage a { color: var(--purple); text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">🎉</div>
+  <h1>Pagamento completato!</h1>
+  <div class="sub">Benvenuto in Charlotte Parking. La tua prova gratuita di 30 giorni è iniziata.</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Apri l'app e clicca <strong>"Crea account owner"</strong>, poi registrati con la stessa email usata nel pagamento</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Segui il wizard di configurazione: <strong>nome azienda, garage, operatori e PIN</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Dal <strong>Pannello Owner</strong> configura tariffe e convenzioni</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Comunica il <strong>PIN a 6 cifre</strong> ai tuoi operatori — accedono premendo "Sono un operatore"</div>
+    </div>
+  </div>
+
+  <a class="btn" href="https://charlottesystems.github.io/charlotte-commercial/">Apri l'app →</a>
+  <div class="manage">
+    Vuoi gestire il tuo abbonamento?
+    <a href="https://billing.stripe.com/p/login/6oU3cwa7w8Lg5YP97Lc7u00" target="_blank">Accedi al portale Stripe →</a>
+  </div>
+</div>
+</body>
+</html>

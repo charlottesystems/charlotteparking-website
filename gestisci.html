@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte Parking — Gestisci abbonamento</title>
+  <meta name="description" content="Gestisci, modifica o disdici il tuo abbonamento Charlotte Parking.">
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F4F2FA;
+      --card: #FFFFFF;
+      --purple: #7B2FBE;
+      --purple-light: #f0e8fa;
+      --text: #1a1a2e;
+      --muted: #6b6b80;
+      --border: #e4e0f0;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container { max-width: 460px; width: 100%; }
+    .back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; text-decoration: none; margin-bottom: 24px; }
+    .back:hover { color: var(--purple); }
+    .header { text-align: center; margin-bottom: 32px; }
+    .logo { width: 64px; height: 64px; background: linear-gradient(135deg, #7B2FBE, #a855f7); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 32px; color: white; margin: 0 auto 16px; box-shadow: 0 8px 32px rgba(123,47,190,0.3); }
+    .header h1 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 24px; padding: 32px 28px; }
+    .options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .option { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px; font-size: 14px; color: var(--text); }
+    .option-icon { font-size: 22px; flex-shrink: 0; }
+    .option strong { display: block; font-weight: 600; margin-bottom: 2px; }
+    .option span { color: var(--muted); font-size: 13px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); background: white; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus { border-color: var(--purple); }
+    .btn { width: 100%; padding: 15px; background: linear-gradient(135deg, #7B2FBE, #a855f7); border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; color: white; cursor: pointer; transition: all 0.2s; }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .note { text-align: center; margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+    .new-sub { text-align: center; font-size: 14px; color: var(--muted); }
+    .new-sub a { color: var(--purple); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <a class="back" href="index.html">← Torna alla home</a>
+
+  <div class="header">
+    <div class="logo">C</div>
+    <h1>Gestisci abbonamento</h1>
+    <p>Accedi al portale clienti per gestire il tuo piano Charlotte Parking.</p>
+  </div>
+
+  <div class="card">
+    <div class="options">
+      <div class="option">
+        <div class="option-icon">💳</div>
+        <div><strong>Aggiorna pagamento</strong><span>Cambia carta di credito o metodo di pagamento</span></div>
+      </div>
+      <div class="option">
+        <div class="option-icon">📄</div>
+        <div><strong>Scarica fatture</strong><span>Accedi allo storico delle fatture emesse</span></div>
+      </div>
+      <div class="option">
+        <div class="option-icon">🚫</div>
+        <div><strong>Disdici abbonamento</strong><span>Cancella quando vuoi, senza penali</span></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>La tua email</label>
+      <input type="email" id="portal-email" placeholder="nome@azienda.it" autocomplete="email">
+    </div>
+
+    <button class="btn" onclick="apriPortale()">Accedi al portale →</button>
+
+    <div class="note">
+      Riceverai un link via email da Stripe per accedere in modo sicuro al portale.
+    </div>
+
+    <hr class="divider">
+
+    <div class="new-sub">
+      Non hai ancora un abbonamento? <a href="abbonamento.html">Abbonati qui →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function apriPortale() {
+    const email = document.getElementById('portal-email').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('portal-email').focus();
+      document.getElementById('portal-email').style.borderColor = '#dc2626';
+      setTimeout(() => document.getElementById('portal-email').style.borderColor = '', 2000);
+      return;
+    }
+    const url = 'https://billing.stripe.com/p/login/6oU3cwa7w8Lg5YP97Lc7u00?prefilled_email=' + encodeURIComponent(email);
+    window.open(url, '_blank');
+  }
+
+  document.getElementById('portal-email').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') apriPortale();
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const emailParam = params.get('email');
+  if (emailParam) document.getElementById('portal-email').value = emailParam;
+</script>
+
+</body>
+</html>
