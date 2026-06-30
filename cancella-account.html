@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte Parking — Elimina account</title>
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F4F2FA; --card: #FFFFFF; --purple: #7B2FBE;
+      --text: #1a1a2e; --muted: #6b6b80; --border: #e4e0f0;
+      --red: #dc2626; --red-light: #fef2f2;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .container { max-width: 460px; width: 100%; }
+    .back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; text-decoration: none; margin-bottom: 24px; }
+    .back:hover { color: var(--purple); }
+    .header { text-align: center; margin-bottom: 28px; }
+    .icon { font-size: 56px; margin-bottom: 12px; }
+    .header h1 { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--text); margin-bottom: 8px; }
+    .header p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 24px; padding: 28px; }
+    .warning { background: var(--red-light); border: 1.5px solid #fca5a5; border-radius: 12px; padding: 14px 16px; margin-bottom: 24px; font-size: 13px; color: var(--red); line-height: 1.6; }
+    .warning strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); background: white; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus { border-color: var(--red); }
+    .btn-delete { width: 100%; padding: 15px; background: var(--red); border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; color: white; cursor: pointer; transition: all 0.2s; }
+    .btn-delete:hover { background: #b91c1c; }
+    .btn-delete:disabled { opacity: 0.6; cursor: not-allowed; }
+    .msg { margin-top: 14px; padding: 14px 16px; border-radius: 12px; font-size: 14px; text-align: center; display: none; line-height: 1.5; }
+    .msg.success { background: #f0fdf4; border: 1px solid #86efac; color: #16a34a; }
+    .msg.error { background: var(--red-light); border: 1px solid #fca5a5; color: var(--red); }
+    .note { text-align: center; margin-top: 14px; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <a class="back" href="index.html">← Torna alla home</a>
+
+  <div class="header">
+    <div class="icon">🗑️</div>
+    <h1>Elimina account</h1>
+    <p>Inserisci la tua email: riceverai un link per confermare l'eliminazione di tutti i tuoi dati.</p>
+  </div>
+
+  <div class="card">
+    <div class="warning">
+      <strong>⚠️ Operazione irreversibile</strong>
+      Verranno eliminati definitivamente: account, garage, soste, operatori, prenotazioni, tariffe e convenzioni.
+    </div>
+
+    <div id="step-email">
+      <div class="form-group">
+        <label>La tua email owner</label>
+        <input type="email" id="delete-email" placeholder="nome@azienda.it" autocomplete="email">
+      </div>
+      <button class="btn-delete" id="btn-send" onclick="inviaLink()">Invia link di conferma</button>
+      <div class="msg" id="msg-email"></div>
+      <div class="note">Riceverai una email con un link. Cliccalo per procedere con l'eliminazione.</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const sb = window.supabase.createClient(
+    'https://cmglerkaiycllfvgjuww.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZ2xlcmthaXljbGxmdmdqdXd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5Mzk3MzEsImV4cCI6MjA5NjUxNTczMX0.Rq1BMRKhQium6tFCmZvid53rjcAXNpckmsSSnTlAiDE'
+  );
+
+  async function inviaLink() {
+    const email = document.getElementById('delete-email').value.trim();
+    const btn = document.getElementById('btn-send');
+    const msg = document.getElementById('msg-email');
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('delete-email').style.borderColor = '#dc2626';
+      setTimeout(() => document.getElementById('delete-email').style.borderColor = '', 2000);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso...';
+    msg.style.display = 'none';
+
+    // Invia magic link con redirect all'app per la conferma eliminazione
+    const redirectTo = 'https://charlottesystems.github.io/charlotte-commercial/elimina-account.html';
+    const { error } = await sb.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectTo, shouldCreateUser: false }
+    });
+
+    if (error) {
+      msg.className = 'msg error';
+      // Se l'email non esiste in Supabase, shouldCreateUser:false restituisce errore
+      msg.textContent = error.message.includes('not found') || error.status === 400
+        ? 'Nessun account trovato con questa email.'
+        : 'Errore nell\'invio. Riprova tra qualche secondo.';
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Invia link di conferma';
+      return;
+    }
+
+    msg.className = 'msg success';
+    msg.textContent = '✓ Email inviata! Controlla la tua casella e clicca il link per confermare l\'eliminazione.';
+    msg.style.display = 'block';
+    btn.textContent = 'Email inviata';
+  }
+
+  document.getElementById('delete-email').addEventListener('keydown', e => {
+    if (e.key === 'Enter') inviaLink();
+  });
+</script>
+
+</body>
+</html>
