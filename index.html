@@ -499,15 +499,15 @@
   <!-- STATS -->
   <div class="stats">
     <div class="stat">
-      <span class="stat-num">100%</span>
+      <span class="stat-num" data-count="100" data-suffix="%">100%</span>
       <span class="stat-label">digitale — addio fogli Excel e quaderni</span>
     </div>
     <div class="stat">
-      <span class="stat-num">∞</span>
+      <span class="stat-num" data-symbol="∞">∞</span>
       <span class="stat-label">operatori su qualsiasi dispositivo</span>
     </div>
     <div class="stat">
-      <span class="stat-num">€39</span>
+      <span class="stat-num" data-count="39" data-prefix="€">€39</span>
       <span class="stat-label">al mese, offerta di lancio</span>
     </div>
   </div>
@@ -743,6 +743,45 @@
     </div>
     <p>Charlotte Parking · Charlotte Systems · charlotteparking.it · © 2026 — Tutti i diritti riservati</p>
   </footer>
+
+<script>
+(function() {
+  const duration = 1400;
+
+  function easeOut(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animateCount(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.round(easeOut(progress) * target);
+      el.textContent = prefix + value + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('.stat-num[data-count]').forEach(animateCount);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.stats').forEach(function(el) {
+    observer.observe(el);
+  });
+})();
+</script>
 
 </body>
 </html>
