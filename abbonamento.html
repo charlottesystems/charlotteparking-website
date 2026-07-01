@@ -106,7 +106,7 @@
       <span class="price-main">39€</span>
       <span class="price-sub">/mese</span>
     </div>
-    <div class="price-note">30 giorni di prova gratuita · Disdici quando vuoi</div>
+    <div class="price-note">30 giorni di prova gratuita · Nessuna carta richiesta · Disdici quando vuoi</div>
 
     <ul class="features">
       <li>Garage illimitati</li>
@@ -133,7 +133,7 @@
   </div>
 
   <div class="guarantee">
-    🔒 Pagamento sicuro con Stripe · Nessun addebito per 30 giorni · Cancella in qualsiasi momento
+    ✅ Nessuna carta richiesta · Prova gratuita 30 giorni · Cancella in qualsiasi momento
   </div>
 
   <div class="legal">
@@ -151,7 +151,7 @@
 <script>
   const SUPABASE_FUNCTIONS_URL = 'https://cmglerkaiycllfvgjuww.supabase.co/functions/v1';
 
-  async function avviaCheckout() {
+  function avviaCheckout() {
     const emailInput = document.getElementById('checkout-email');
     const btn = document.getElementById('checkout-btn');
     const errEl = document.getElementById('checkout-error');
@@ -166,33 +166,11 @@
       return;
     }
 
-    btn.textContent = 'Reindirizzamento a Stripe...';
+    btn.textContent = 'Apertura app...';
     btn.disabled = true;
 
-    try {
-      const resp = await fetch(SUPABASE_FUNCTIONS_URL + '/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          success_url: window.location.origin + '/success.html?session_id={CHECKOUT_SESSION_ID}',
-          cancel_url: window.location.href,
-        }),
-      });
-
-      const data = await resp.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        throw new Error(data.error || 'Errore sconosciuto');
-      }
-    } catch (err) {
-      console.error('Checkout error:', err);
-      errEl.textContent = 'Errore durante il reindirizzamento. Riprova tra qualche secondo.';
-      errEl.style.display = 'block';
-      btn.textContent = 'Inizia la prova gratuita — 30 giorni →';
-      btn.disabled = false;
-    }
+    const appUrl = 'https://charlottesystems.github.io/charlotte-commercial/?email=' + encodeURIComponent(email);
+    window.location.href = appUrl;
   }
 
   async function apriPortaleGestione() {
